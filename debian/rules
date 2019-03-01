@@ -1,0 +1,18 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+export DH_VERBOSE=1
+export DH_OPTIONS=-V
+
+export DEB_CFLAGS_MAINT_APPEND= -flto
+
+include /usr/share/dpkg/architecture.mk
+
+%:
+	dh $@ 
+
+override_dh_auto_build:
+	dh_auto_build -- LIBDIR=\$${PREFIX}/lib/$(DEB_HOST_MULTIARCH) CROSS_COMPILE=$(DEB_HOST_GNU_TYPE)-
+
+override_dh_auto_install:
+	dh_auto_install -- LIBDIR=\$${PREFIX}/lib/$(DEB_HOST_MULTIARCH)
