@@ -4,9 +4,14 @@
 export DH_VERBOSE=1
 export DH_OPTIONS=-V
 
-export DEB_CFLAGS_MAINT_APPEND= -flto
+include /usr/share/dpkg/default.mk
 
-include /usr/share/dpkg/architecture.mk
+export DEB_CFLAGS_MAINT_APPEND= -flto -flto-partition=none
+export DEB_LDFLAGS_MAINT_APPEND= -flto -flto-partition=none
+ifeq ($(DEB_HOST_ARCH),amd64)
+export DEB_CFLAGS_MAINT_APPEND+= -fcf-protection
+export DEB_LDFLAGS_MAINT_APPEND+= -fcf-protection
+endif
 
 %:
 	dh $@ 
