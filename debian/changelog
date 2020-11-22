@@ -1,3 +1,13 @@
+efivar (37-2+deb10u1) buster; urgency=medium
+
+  * Backport important fixes from unstable:
+    + fix uninitialized variable in parse_acpi_root, saving possible
+      segfault.
+    + Add support for nvme-fabrics and nvme-subsystem devices. Closes:
+      #975417
+
+ -- Steve McIntyre <93sam@debian.org>  Sun, 22 Nov 2020 00:03:59 +0000
+
 efivar (37-2) unstable; urgency=medium
 
   * Cherry-pick fix from upstream:
